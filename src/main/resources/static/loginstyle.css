@@ -1,0 +1,190 @@
+@charset "UTF-8";
+/* Google Fonts에서 Poppins 글꼴을 불러옵니다. */
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+/* 모든 요소에 대한 기본 스타일을 설정합니다. */
+* {
+	margin: 0; /* 마진을 0으로 설정 */
+	padding: 0; /* 패딩을 0으로 설정 */
+	box-sizing: border-box; /* 요소의 너비와 높이가 패딩과 테두리를 포함하도록 설정 */
+	font-family: 'Poppins', sans-serif; /* 글꼴을 Poppins로 설정 */
+}
+
+/* body 태그에 대한 스타일을 설정합니다. */
+body {
+	display: flex; /* Flexbox 레이아웃을 사용 */
+	justify-content: center; /* 주 축(가로 축)에서 중앙 정렬 */
+	align-items: center; /* 교차 축(세로 축)에서 중앙 정렬 */
+	min-height: 100vh; /* 최소 높이를 뷰포트 높이의 100%로 설정 */
+	background: #25252b; /* 배경색을 설정 */
+}
+
+/* CSS 변수 --a를 정의합니다. 이 변수는 회전 애니메이션에 사용됩니다. */
+@property --a {
+	syntax: '<angle>'; /* 각도 값을 사용 */
+	inherits: false; /* 상속되지 않음 */
+	initial-value: 0deg; /* 초기값을 0도로 설정 */
+}
+
+/* .box 클래스에 대한 스타일을 설정합니다. */
+.box {
+	position: relative; /* 상대 위치 */
+	width: 400px; /* 너비 설정 */
+	height: 200px; /* 높이 설정 */
+	/* 반복되는 원추형 그래디언트 배경 */
+	background: repeating-conic-gradient(from var(--a), #ff2770 0%, #ff2770 5%, transparent 5%, transparent 40%, #ff2770 50%);
+	filter: drop-shadow(0 15px 50px #000); /* 그림자 효과 */
+	border-radius: 20px; /* 테두리 반지름 */
+	animation: rotating 4s linear infinite; /* 회전 애니메이션 */
+	display: flex; /* Flexbox 레이아웃 사용 */
+	justify-content: center; /* 주 축(가로 축)에서 중앙 정렬 */
+	align-items: center; /* 교차 축(세로 축)에서 중앙 정렬 */
+	transition: 0.5s; /* 전환 효과 시간 */
+	color: #fff; /* 텍스트 색상 */
+	/* hover 시 잔상 방지를 위한 GPU 가속 유도 */
+	will-change: transform;
+}
+
+/* .box 요소에 마우스를 올렸을 때의 스타일 변화를 설정합니다. */
+.box:hover {
+	width: 450px; /* 너비 확장 */
+	height: 500px; /* 높이 확장 */
+}
+
+/* 회전 애니메이션을 정의합니다. */
+@keyframes rotating { 
+	0% {
+		--a: 0deg; /* 시작할 때의 각도 */
+	}
+	100% {
+		--a: 360deg; /* 끝날 때의 각도 */
+	}
+}
+
+/* .box::before 의사 요소에 대한 스타일을 설정합니다. */
+.box::before {
+	content: ''; /* 내용은 비어 있음 */
+	position: absolute; /* 절대 위치 */
+	width: 100%; /* 너비 100% */
+	height: 100%; /* 높이 100% */
+	/* 반복되는 원추형 그래디언트 배경 */
+	background: repeating-conic-gradient(from var(--a), #45f3ff 0%, #45f3ff 5%, transparent 5%, transparent 40%, #45f3ff 50%);
+	filter: drop-shadow(0 15px 50px #000); /* 그림자 효과 */
+	border-radius: 20px; /* 테두리 반지름 */
+	animation: rotating 4s linear infinite; /* 회전 애니메이션 */
+	animation-delay: -1s; /* 애니메이션 지연 */
+}
+
+/* .box::after 의사 요소에 대한 스타일을 설정합니다. */
+.box::after {
+	content: ''; /* 내용은 비어 있음. 회전하는 색상 앞으로 튀어나오지 않도록 합니다. */
+	position: absolute; /* 절대 위치 */
+	inset: 4px; /* 요소의 내부 여백 */
+	background: #2d2d39; /* 배경색 */
+	border-radius: 15px; /* 테두리 반지름 */
+	border: 8px solid #25252b; /* 테두리 스타일 */
+}
+
+/* .login 클래스에 대한 스타일을 설정합니다. */
+.login {
+	position: absolute; /* 절대 위치 */
+	inset: 60px; /* 내부 여백 */
+	display: flex; /* Flexbox 레이아웃 사용 */
+	justify-content: center; /* 주 축(가로 축)에서 중앙 정렬 */
+	align-items: center; /* 교차 축(세로 축)에서 중앙 정렬 */
+	flex-direction: column; /* 항목을 세로로 정렬 */
+	border-radius: 10px; /* 테두리 반지름 */
+	background: rgba(0,0,0,0.2); /* 배경 색상과 투명도 */
+	z-index: 1000; /* z-index 순서 */
+	box-shadow: inset 0 10px 20px rgb(0,0,0,0.5); /* 내부 그림자 효과 */
+	border-bottom: 2px solid rgba(255, 255, 255, 0.5); /* 하단 테두리 */
+	transition: 0.5s; /* 전환 효과 시간 */
+	color: #fff; /* 텍스트 색상 */
+	overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+}
+
+/* .box:hover .login: .box에 마우스를 올렸을 때 .login의 스타일 변화를 설정합니다. */
+.box:hover .login {
+	inset: 40px; /* 내부 여백 축소 */
+}
+
+/* .loginBx에 대한 스타일을 설정합니다. */
+.loginBx{
+	position: relative; /* 상대 위치 */
+	display: flex; /* Flexbox 레이아웃 사용 */
+	justify-content: center; /* 주 축(가로 축)에서 중앙 정렬 */
+	align-items: center; /* 교차 축(세로 축)에서 중앙 정렬 */
+	flex-direction: column; /* 항목을 세로로 정렬 */
+	gap: 20px; /* 항목 간 간격 */
+	width: 70%; /* 너비 70% */
+	transform: translateY(126px); /* Y축을 따라 아래로 이동 */
+	transition: 0.5s; /* 전환 효과 시간 */
+}
+
+/* .box:hover .loginBx: .box에 마우스를 올렸을 때 .loginBx의 변화를 설정합니다. */
+.box:hover .loginBx{
+	transform: translateY(0px); /* 원래 위치로 복귀 */
+}
+
+/* .loginBx h2: 제목 스타일을 설정합니다. */
+.loginBx h2{
+	text-transform: uppercase; /* 대문자 변환 */
+	font-weight: 600; /* 글꼴 두께 */
+	letter-spacing: 0.2em; /* 글자 간격 */
+}
+
+/* .loginBx h2 i: 아이콘 스타일을 설정합니다. */
+.loginBx h2 i{
+	color: #ff2770; /* 색상 */
+	text-shadow: 0 0 5px #ff2770, 0 0 25px #ff2770; /* 텍스트 그림자 효과 */
+}
+
+/* .loginBx input: 입력 필드 스타일을 설정합니다. */
+.loginBx input {
+  display: block; /* 블록 레벨 요소로 만들어 줄바꿈 */
+  width: 100%; /* 전체 폭에서 양쪽 패딩 또는 여백을 고려한 너비 */
+  margin: 10px auto; /* 자동 마진으로 위아래에 10px, 좌우 중앙 정렬 */
+  padding: 10px 20px; /* 적절한 패딩으로 내용이 입력 공간 내부에 잘 들어가도록 조정 */
+  outline: none; /* 외곽선 제거 */
+  border: none; /* 테두리 제거 */
+  font-size: 1em; /* 글꼴 크기 */
+  color: #fff; /* 텍스트 색상 */
+  background: rgba(0, 0, 0, 0.1); /* 배경색과 투명도 */
+  border: 2px solid #fff; /* 테두리 스타일 */
+  border-radius: 30px; /* 테두리 반지름 */
+}
+
+/* .loginBx input::placeholder: 입력 필드 플레이스홀더 스타일을 설정합니다. */
+.loginBx input::placeholder{
+	color: #999; /* 색상 */
+}
+
+.loginBx input[type="submit"] {
+  background: #45f3ff; /* 배경색 */
+  border: none; /* 테두리 제거 */
+  font-weight: 500; /* 글꼴 두께 */
+  color: #111; /* 텍스트 색상 */
+  cursor: pointer; /* 클릭 가능함을 나타내는 커서 스타일 */
+  transition: 0.5s; /* 전환 효과 시간 */
+}
+
+.loginBx input[type="submit"]:hover {
+  box-shadow: 0 0 10px #45f3ff, 0 0 20px #45f3ff; /* 호버 효과 */
+}
+
+.group{
+	width: 100%; /* 너비 100% */
+	display: flex; /* Flexbox 레이아웃 사용 */
+	justify-content: space-between; /* 항목을 양 끝에 배치 */
+}
+/* .group a: 링크 스타일을 설정합니다. */
+.group a{
+	color: #fff; /* 텍스트 색상 */
+	text-decoration: none; /* 밑줄 제거 */
+}
+
+.group a:nth-child(2){
+	color: #ff2770; /* 텍스트 색상 */
+	font-weight: 600; /* 글꼴 두께 */
+}
+
